@@ -183,6 +183,10 @@ body.pres main{height:100vh;box-sizing:border-box;overflow:hidden;padding:30px c
 body.pres main{display:flex;flex-direction:column;justify-content:center}
 body.pres main section{padding:0;border-top:0;flex:0 0 auto}
 body.pres .pres-hide{display:none!important}
+body.pres main video{max-height:calc(100vh - 250px);object-fit:contain;background:#05141F}
+body.pres.nomenu .shell{grid-template-columns:minmax(0,1fr)}
+body.pres.nomenu .rail{display:none}
+body.pres.nomenu main{padding-left:clamp(28px,6vw,110px);padding-right:clamp(28px,6vw,110px)}
 #presBar{display:none;position:fixed;right:18px;bottom:10px;z-index:20;align-items:center;gap:8px;background:#05141F;color:#fff;border-radius:99px;padding:5px 8px;font:600 13px/1 Inter,Arial,sans-serif;font-variant-numeric:tabular-nums}
 body.pres #presBar{display:flex}
 #presBar button{width:30px;height:30px;border-radius:50%;border:1px solid #3A4B57;background:transparent;color:#fff;font:600 16px/1 Inter,Arial,sans-serif;cursor:pointer}
@@ -472,7 +476,7 @@ body.pres #presBar{display:flex}
 </section>
 
 </main>
-<div id="presBar" role="group" aria-label="Páginas da apresentação"><button type="button" id="presPrev" aria-label="Página anterior">‹</button><span id="presCount" aria-live="polite"></span><button type="button" id="presNext" aria-label="Página seguinte">›</button></div>
+<div id="presBar" role="group" aria-label="Páginas da apresentação"><button type="button" id="presPrev" aria-label="Página anterior">‹</button><span id="presCount" aria-live="polite"></span><button type="button" id="presMenu" aria-label="Mostrar ou ocultar o índice (tecla M)" title="Índice (tecla M)" style="font-size:13px">☰</button><button type="button" id="presNext" aria-label="Página seguinte">›</button></div>
 </div>
 
 <script>
@@ -560,24 +564,28 @@ function signed(x){return (x<0?'−':'+')+num(Math.abs(x))+' €';}
   function enter(){if(on())return;var y=window.scrollY+150,first=secs[0];secs.forEach(function(s){if(s.offsetTop<=y)first=s;});
     body.classList.add('pres');window.scrollTo(0,0);build();
     var n=0;for(var i=0;i<pages.length;i++){if(pages[i].sec===first){n=i;break;}}show(n);sync();}
-  function leave(){if(!on())return;var s=pages[cur]?pages[cur].sec:null;body.classList.remove('pres');clear();sync();
+  function leave(){if(!on())return;var s=pages[cur]?pages[cur].sec:null;body.classList.remove('pres');body.classList.remove('nomenu');clear();sync();
     if(s)window.scrollTo(0,s.offsetTop-20);window.dispatchEvent(new Event('scroll'));}
   function sync(){btn.setAttribute('aria-pressed',on()?'true':'false');btn.textContent=on()?'Sair da apresentação (tecla P)':'Modo apresentação (tecla P)';}
   btn.addEventListener('click',function(){on()?leave():enter();});
   $('presPrev').addEventListener('click',function(){show(cur-1);});
   $('presNext').addEventListener('click',function(){show(cur+1);});
+  $('presMenu').addEventListener('click',function(){menu(!body.classList.contains('nomenu'));});
   links.forEach(function(a){a.addEventListener('click',function(ev){if(!on())return;ev.preventDefault();var id=a.getAttribute('href').slice(1);
     for(var i=0;i<pages.length;i++){if(pages[i].sec.id===id){show(i);break;}}});});
   function fs(){return !!(d.fullscreenElement||d.webkitFullscreenElement);}
-  function onFs(){setTimeout(function(){if(fs())enter();else leave();},120);}
+  function onFs(){setTimeout(function(){if(fs()){body.classList.add('nomenu');enter();}else{leave();body.classList.remove('nomenu');}},120);}
   d.addEventListener('fullscreenchange',onFs);d.addEventListener('webkitfullscreenchange',onFs);
-  var rt;window.addEventListener('resize',function(){if(!on())return;clearTimeout(rt);rt=setTimeout(function(){var s=pages[cur].sec,k=0;
+  function rebuild(){var s=pages[cur].sec,k=0;
     for(var i=0;i<cur;i++){if(pages[i].sec===s)k++;}build();var n=0,c=0;
-    for(var j=0;j<pages.length;j++){if(pages[j].sec===s){n=j;if(c===k)break;c++;}}show(n);},150);});
+    for(var j=0;j<pages.length;j++){if(pages[j].sec===s){n=j;if(c===k)break;c++;}}show(n);}
+  function menu(hide){if(body.classList.contains('nomenu')===hide)return;body.classList.toggle('nomenu',hide);if(on())rebuild();}
+  var rt;window.addEventListener('resize',function(){if(!on())return;clearTimeout(rt);rt=setTimeout(rebuild,150);});
   d.addEventListener('keydown',function(ev){
     var t=ev.target.tagName;if(t==='INPUT'||t==='SELECT'||t==='TEXTAREA'||t==='VIDEO'||ev.ctrlKey||ev.metaKey||ev.altKey)return;
     if(ev.key==='p'||ev.key==='P'){ev.preventDefault();on()?leave():enter();return;}
     if(!on())return;
+    if(ev.key==='m'||ev.key==='M'){ev.preventDefault();menu(!body.classList.contains('nomenu'));return;}
     var k=ev.key;
     if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||k===' '){if(k===' '&&t==='BUTTON')return;ev.preventDefault();show(cur+1);}
     else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'){ev.preventDefault();show(cur-1);}
