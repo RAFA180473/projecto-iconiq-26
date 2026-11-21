@@ -389,7 +389,7 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
 
   <p style="margin-top:22px"><button type="button" id="simToggle" aria-expanded="false" aria-controls="simBox" style="background:#05141F;color:#fff;border:0;border-radius:6px;padding:12px 18px;font:600 15px Inter,Arial,sans-serif;cursor:pointer">Abrir o simulador</button></p>
   <div class="sim" id="simBox" aria-labelledby="h-sim" hidden>
-    <h3 id="h-sim">Simulador: reservas directas, contratos e extras</h3>
+    <h3 id="h-sim">Simulador: reservas directas, contratos, extras e ROI</h3>
     <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Escolha um cenário ou mexa nos dois controlos. Os valores são anuais e comparam com a base de hoje (WheelSys, Janeiro a Outubro de 2026, anualizada).</p>
     <div class="presets" role="group" aria-label="Cenários">
       <button type="button" data-preset="prudente" aria-pressed="false">Prudente · directas +10%</button>
@@ -410,11 +410,15 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
           <div class="wide"><div><p class="k">Reservas directas por ano</p><p class="v" id="r-direct"></p></div><span class="pill on" id="r-directd"></span></div>
           <div><p class="k">Contratos globais por ano</p><p class="v" id="r-global"></p><p class="k" id="r-globald" style="margin-top:6px"></p></div>
           <div><p class="k">Extras vendidos por ano</p><p class="v" id="r-extras"></p><p class="k" id="r-extrasd" style="margin-top:6px"></p></div>
+          <div class="wide"><div><p class="k">ROI anual · retorno face ao custo</p><p class="v" id="r-roi"></p></div><span class="pill" id="r-saldo"></span></div>
+          <div><p class="k">Retorno por ano (margem)</p><p class="v" id="r-ret"></p><div style="height:8px;background:#1B3442;border-radius:99px;margin-top:10px;padding:0;overflow:hidden"><div id="r-retbar" style="height:8px;background:#00F2D7;border-radius:99px;padding:0;width:0"></div></div></div>
+          <div><p class="k">Custo por ano</p><p class="v" id="r-cost"></p><div style="height:8px;background:#1B3442;border-radius:99px;margin-top:10px;padding:0;overflow:hidden"><div id="r-costbar" style="height:8px;background:#B9C6CD;border-radius:99px;padding:0;width:0"></div></div></div>
+          <div class="wide" style="padding:12px 16px"><p class="k" id="r-saldo24"></p></div>
         </div>
         <p class="sr" id="sim-live" aria-live="polite"></p>
       </div>
     </div>
-    <p class="fine">São hipóteses, não resultados. Hoje: cerca de 690 reservas directas, 18.579 contratos e 9.301 extras por ano. Os cenários incluem também as hipóteses de repetição e de abrangência do Concierge definidas pelo grupo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
+    <p class="fine">São hipóteses, não resultados. O retorno é a margem dos contratos e extras a mais (30% e 55% no cenário de referência); o custo são os 48.000 € por ano da fase 2; ROI = (retorno − custo) ÷ custo. Hoje: cerca de 690 reservas directas, 18.579 contratos e 9.301 extras por ano. Os cenários incluem também as hipóteses de repetição e de abrangência do Concierge definidas pelo grupo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
   </div>
 </section>
 
@@ -547,7 +551,17 @@ function run(){
   $('r-globald').textContent='+'+num(r.contracts)+' contratos';
   $('r-extras').textContent=num(r.extraBase+r.extraAdded);
   $('r-extrasd').textContent='+'+num(r.extraAdded)+' extras';
-  $('sim-live').textContent='Cenário '+NAMES[current]+': '+num(r.directBase+r.addedDirect)+' reservas directas por ano, mais '+num(r.addedDirect)+' do que hoje; '+num(r.baseClose+r.contracts)+' contratos globais, mais '+num(r.contracts)+'; '+num(r.extraBase+r.extraAdded)+' extras vendidos, mais '+num(r.extraAdded)+'.';
+  var roi=r.opex>0?(r.contribution-r.opex)/r.opex*100:0, mx=Math.max(r.contribution,r.opex,1);
+  $('r-roi').textContent=(roi<0?'−':'+')+num(Math.abs(roi))+'%';
+  $('r-roi').style.color=roi<0?'#FFB4A8':'#00F2D7';
+  $('r-saldo').textContent='Saldo '+signed(r.balance)+' por ano';
+  $('r-saldo').className='pill'+(r.balance>=0?' on':'');
+  $('r-ret').textContent=eur(r.contribution);
+  $('r-cost').textContent=eur(r.opex);
+  $('r-retbar').style.width=(r.contribution/mx*100)+'%';
+  $('r-costbar').style.width=(r.opex/mx*100)+'%';
+  $('r-saldo24').textContent='Saldo a 24 meses, já com os 28.000 € do investimento inicial: '+signed(r.saldo24)+'.';
+  $('sim-live').textContent='Cenário '+NAMES[current]+': '+num(r.directBase+r.addedDirect)+' reservas directas por ano, mais '+num(r.addedDirect)+' do que hoje; '+num(r.baseClose+r.contracts)+' contratos globais, mais '+num(r.contracts)+'; '+num(r.extraBase+r.extraAdded)+' extras vendidos, mais '+num(r.extraAdded)+'; retorno de '+eur(r.contribution)+' por ano para um custo de '+eur(r.opex)+', ROI de '+(roi<0?'menos ':'')+num(Math.abs(roi))+'%.';
 }
 function setPreset(name){
   current=name;KEYS.forEach(function(k){$(k).value=PRESETS[name][k];});
