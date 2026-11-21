@@ -289,12 +289,6 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
       </div>
     </div>
   </div>
-  <div class="tile" style="margin-top:18px">
-    <h3 id="h-hom">Julho a Outubro: 2025 contra 2026, por estação</h3>
-    <p style="margin:10px 0 12px"><label for="homMetric">Indicador: </label><select id="homMetric" style="padding:7px 10px;border-radius:8px;border:1px solid var(--line);font:500 15px Inter,Arial,sans-serif;background:#fff;color:var(--night)"><option value="contracts">Contratos</option><option value="rental_net">Net rental</option><option value="extras">Extras</option></select></p>
-    <table aria-labelledby="h-hom" style="width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums"><thead><tr><th scope="col" style="text-align:left;padding:8px 6px;border-bottom:2px solid var(--night)">Estação</th><th scope="col" style="text-align:right;padding:8px 6px;border-bottom:2px solid var(--night)">2025</th><th scope="col" style="text-align:right;padding:8px 6px;border-bottom:2px solid var(--night)">2026</th><th scope="col" style="text-align:right;padding:8px 6px;border-bottom:2px solid var(--night)">Variação</th></tr></thead><tbody id="homBody"></tbody></table>
-    <p class="note" id="homNote" aria-live="polite"></p>
-  </div>
   <div class="grid g3">
     <div class="tile"><p class="k">Contratos</p><p class="v">+51,7%</p><p class="d">Julho a Outubro, 2026 contra 2025.</p></div>
     <div class="tile"><p class="k">Net rental</p><p class="v">+29,1%</p><p class="d">O net rental por contrato desceu de 252 € para 215 €, menos 14,9%.</p></div>
@@ -583,14 +577,6 @@ function setPreset(name){
 document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){setPreset(b.dataset.preset);});});
 KEYS.forEach(function(k){$(k).addEventListener('input',function(){current='personalizado';
   document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed','false');});run();});});
-var HOM={"contracts":{"Lisboa":[2993,3566],"Porto":[1384,2686],"Faro":[1416,2535]},"rental_net":{"Lisboa":[784058,800700],"Porto":[391084,642538],"Faro":[285579,443099]},"extras":{"Lisboa":[85812,164242],"Porto":[50939,127733],"Faro":[21482,55218]}};
-function hom(){var k=$('homMetric').value,m=HOM[k],h='',ta=0,tb=0,money=k!=='contracts';
-  function f(x){return money?eur(x):num(x);} function v(a,b){return (b>=a?'+':'−')+num(Math.abs((b/a-1)*100),1)+'%';}
-  function row(n,a,b,bold){var st='padding:8px 6px;border-bottom:1px solid var(--line);'+(bold?'font-weight:700;':'');return '<tr><th scope="row" style="text-align:left;'+st+'">'+n+'</th><td style="text-align:right;'+st+'">'+f(a)+'</td><td style="text-align:right;'+st+'">'+f(b)+'</td><td style="text-align:right;'+st+'">'+v(a,b)+'</td></tr>';}
-  ['Lisboa','Porto','Faro'].forEach(function(s){ta+=m[s][0];tb+=m[s][1];h+=row(s,m[s][0],m[s][1]);});
-  $('homBody').innerHTML=h+row('Total',ta,tb,true);
-  $('homNote').textContent='Total das três estações: '+f(ta)+' em 2025 e '+f(tb)+' em 2026, '+v(ta,tb)+'. Dados WheelSys, Julho a Outubro.';}
-$('homMetric').addEventListener('change',hom);hom();
 $('iaReset').addEventListener('click',function(){setPreset('referencia');});
 setPreset('referencia');
 
