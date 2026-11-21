@@ -378,29 +378,31 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
     <p style="margin:0;font:700 clamp(30px,4.6vw,64px)/1.08 var(--display);letter-spacing:-.02em;color:#00F2D7">Crescer em margem, com as mesmas pessoas, focadas no cliente.</p>
     <p style="margin:18px 0 0;font:500 clamp(18px,1.9vw,24px)/1.4 Inter,Arial,sans-serif;color:#fff">Não imputamos custos em estrutura. Investimos na tecnologia que mantém o nível de serviço, em qualquer época do ano.</p>
   </div>
-  <p class="note">O que falta provar: no cenário de referência o serviço ainda não cobre o custo anual de manutenção; com a meta de repetição passa a cobrir. Por isso pedimos só a fase 1 e medimos antes de avançar.</p>
+  <p class="note">O que falta provar: o retorno depende de ganhar penetração nas reservas directas, na repetição e nos extras. Por isso pedimos só a fase 1 e medimos antes de avançar.</p>
 
   <p style="margin-top:22px"><button type="button" id="simToggle" aria-expanded="false" aria-controls="simBox" style="background:#05141F;color:#fff;border:0;border-radius:6px;padding:12px 18px;font:600 15px Inter,Arial,sans-serif;cursor:pointer">Abrir o simulador</button></p>
   <div class="sim" id="simBox" aria-labelledby="h-sim" hidden>
-    <h3 id="h-sim">Simulador: reservas directas, contratos, extras e ROI</h3>
-    <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Escolha um cenário ou mexa nos dois controlos. Os valores são anuais e comparam com a base de hoje (WheelSys, Janeiro a Outubro de 2026, anualizada).</p>
+    <h3 id="h-sim">Simulador: vendas totais, penetração e ROI</h3>
+    <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Escolha um cenário ou mexa nos controlos. Os valores são anuais e partem da base de hoje (WheelSys, Janeiro a Outubro de 2026, anualizada). O Concierge mede-se pela penetração: a parte das vendas que passa a ser directa, a repetir ou a levar extras.</p>
     <div class="presets" role="group" aria-label="Cenários">
-      <button type="button" data-preset="prudente" aria-pressed="false">Prudente · directas +10%</button>
-      <button type="button" data-preset="referencia" aria-pressed="true">Referência · +25%</button>
-      <button type="button" data-preset="ambicioso" aria-pressed="false">Ambicioso · +50%</button>
+      <button type="button" data-preset="prudente" aria-pressed="true">Prudente · directas a 5%</button>
+      <button type="button" data-preset="referencia" aria-pressed="false">Referência · directas a 6%</button>
+      <button type="button" data-preset="ambicioso" aria-pressed="false">Ambicioso · directas a 7,4%</button>
     </div>
     <div class="simgrid">
       <div class="ctl">
-        <div><label for="iaVolume">Crescimento das reservas directas <output id="o-iaVolume"></output></label><input id="iaVolume" type="range" min="0" max="100" step="5"></div>
-        <div><label for="iaExtras">Extras a mais · unidades por 100 contratos <output id="o-iaExtras"></output></label><input id="iaExtras" type="range" min="0" max="12" step="0.5"></div>
-        <div hidden>
-          <input id="iaFDW" type="hidden"><input id="iaRepeat" type="hidden"><input id="iaDirect" type="hidden"><input id="iaExposure" type="hidden"><input id="iaMarginContracts" type="hidden"><input id="iaMarginExtras" type="hidden"><input id="iaSaving" type="hidden"><input id="iaOtherOpex" type="hidden">
-        </div>
-        <div><button type="button" id="iaReset" style="padding:9px 14px;border-radius:999px;border:1px solid #33454F;background:transparent;color:#fff;font:500 14px Inter,Arial,sans-serif;cursor:pointer">Repor o cenário de referência</button></div>
+        <p class="k" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#00F2D7;margin:0">1 · Vendas totais da ICONIQ</p>
+        <div><label for="sTotal">Crescimento das vendas totais <output id="o-sTotal"></output></label><input id="sTotal" type="range" min="0" max="15" step="1"></div>
+        <p class="k" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#00F2D7;margin:10px 0 0">2 · Penetração com o Concierge</p>
+        <div><label for="sDirect">Reservas directas · % das vendas <output id="o-sDirect"></output></label><input id="sDirect" type="range" min="3.7" max="10" step="0.1"></div>
+        <div><label for="sRepeat">Clientes que repetem · % <output id="o-sRepeat"></output></label><input id="sRepeat" type="range" min="3.2" max="12" step="0.1"></div>
+        <div><label for="sExtras">Extras · unidades por 100 contratos <output id="o-sExtras"></output></label><input id="sExtras" type="range" min="50" max="65" step="0.5"></div>
+        <div><button type="button" id="iaReset" style="padding:9px 14px;border-radius:999px;border:1px solid #33454F;background:transparent;color:#fff;font:500 14px Inter,Arial,sans-serif;cursor:pointer">Repor o cenário prudente</button></div>
+        <p id="r-explain" style="margin:4px 0 0;font-size:14px;line-height:1.5;color:#D5DEE3;background:#0E2330;border-left:3px solid #00F2D7;border-radius:6px;padding:12px 14px"></p>
       </div>
       <div>
         <div class="out">
-          <div class="wide"><div><p class="k">Reservas directas por ano</p><p class="v" id="r-direct"></p></div><span class="pill on" id="r-directd"></span></div>
+          <div class="wide"><div><p class="k">Reservas directas por ano</p><p class="v" id="r-direct"></p><p class="k" id="r-directq" style="margin-top:6px"></p></div><span class="pill on" id="r-directd"></span></div>
           <div><p class="k">Contratos globais por ano</p><p class="v" id="r-global"></p><p class="k" id="r-globald" style="margin-top:6px"></p></div>
           <div><p class="k">Extras vendidos por ano</p><p class="v" id="r-extras"></p><p class="k" id="r-extrasd" style="margin-top:6px"></p></div>
           <div class="wide"><div><p class="k">ROI anual · retorno face ao custo</p><p class="v" id="r-roi"></p></div><span class="pill" id="r-saldo"></span></div>
@@ -411,7 +413,7 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
         <p class="sr" id="sim-live" aria-live="polite"></p>
       </div>
     </div>
-    <p class="fine">São hipóteses, não resultados. O retorno é a margem dos contratos e extras a mais (30% e 55% no cenário de referência); o custo são os 48.000 € por ano da fase 2; ROI = (retorno − custo) ÷ custo. Hoje: cerca de 690 reservas directas, 18.579 contratos e 9.301 extras por ano. Os cenários incluem também as hipóteses de repetição e de abrangência do Concierge definidas pelo grupo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
+    <p class="fine">São hipóteses, não resultados. Hoje: 3,7% de reservas directas (cerca de 690 em 18.579 contratos), 3,2% de clientes que repetem e 50 extras por 100 contratos. O crescimento das vendas totais não conta como retorno do Concierge: só conta o ganho de penetração. Retorno = margem dos contratos directos e repetidos a mais (30%) e dos extras a mais (55%); custo = 48.000 € por ano da fase 2; ROI = (retorno − custo) ÷ custo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
   </div>
 </section>
 
@@ -504,56 +506,54 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
 // Dados observados (WheelSys, Jan–Out 2026) e modelo do simulador v7.8 do Grupo 5.
 var D={rows:[["Jan",419],["Fev",894],["Mar",1243],["Abr",1487],["Mai",1810],["Jun",1921],["Jul",2205],["Ago",2111],["Set",2278],["Out",2081]],
   closed:16297,totalRevenue:4627023.52,extraRevenue:570945.16,extraUnits:8159,fdwUnits:462,fdwRevenue:66840.87,cohort:9043};
-var F_CONTRACTS=1.14,F_REVENUE=1.09,DIRECT_10M=605,FDW_COVER=0.605,OPEX=48000,CAPEX=28000;
+var F_CONTRACTS=1.14,F_REVENUE=1.09,DIRECT_10M=605,OPEX=48000,CAPEX=28000,REPEAT_N=292,M_CONTRACT=0.30,M_EXTRA=0.55;
+var BASE=(function(){var bc=D.closed*F_CONTRACTS,db=DIRECT_10M*F_CONTRACTS,eb=D.extraUnits*F_CONTRACTS;
+  return {contracts:bc,direct:db,directPct:db/bc*100,repeatPct:REPEAT_N/D.cohort*100,extras:eb,extrasPer100:eb/bc*100,
+          avgContract:D.totalRevenue*F_REVENUE/bc,avgExtra:D.extraRevenue/D.extraUnits};})();
 var PRESETS={
-  prudente:{iaVolume:10,iaExtras:1,iaFDW:1,iaRepeat:0.2,iaDirect:0.5,iaExposure:50,iaMarginContracts:25,iaMarginExtras:50,iaSaving:0,iaOtherOpex:48000},
-  referencia:{iaVolume:25,iaExtras:2,iaFDW:2,iaRepeat:0.5,iaDirect:1,iaExposure:65,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000},
-  ambicioso:{iaVolume:50,iaExtras:4,iaFDW:4,iaRepeat:1,iaDirect:2,iaExposure:80,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000}
+  prudente:{sTotal:0,sDirect:5,sRepeat:5,sExtras:53},
+  referencia:{sTotal:0,sDirect:6,sRepeat:6.5,sExtras:55},
+  ambicioso:{sTotal:0,sDirect:7.4,sRepeat:10,sExtras:58}
 };
 function rnd(x){return Math.round(Math.max(0,x));}
 function calc(p){
-  var baseClose=D.closed*F_CONTRACTS, directBase=DIRECT_10M*F_CONTRACTS;
-  var avgTotal=D.totalRevenue*F_REVENUE/baseClose;
-  var avgOther=(D.extraRevenue-D.fdwRevenue)/(D.extraUnits-D.fdwUnits);
-  var avgFDW=D.fdwRevenue/D.fdwUnits, ex=p.iaExposure/100;
-  var addedDirect=rnd(directBase*p.iaVolume/100*ex);
-  var repeatContracts=rnd(D.cohort*ex*p.iaRepeat/100);
-  var otherUnits=rnd((baseClose+addedDirect+repeatContracts)*ex*p.iaExtras/100);
-  var fdwUnits=rnd(baseClose*ex*(1-FDW_COVER)*Math.min(p.iaFDW/100,1));
-  var revC=(addedDirect+repeatContracts)*avgTotal, revE=otherUnits*avgOther+fdwUnits*avgFDW;
-  var shifted=rnd(baseClose*ex*p.iaDirect/100), savings=shifted*p.iaSaving, opex=p.iaOtherOpex;
-  var cC=revC*p.iaMarginContracts/100, cE=revE*p.iaMarginExtras/100, contribution=cC+cE+savings;
-  return {contracts:addedDirect+repeatContracts,revenue:revC+revE,cC:cC,cE:cE,contribution:contribution,shifted:shifted,savings:savings,opex:opex,
-          balance:contribution-opex,saldo24:2*(contribution-opex)-CAPEX,
-          directBase:rnd(directBase),addedDirect:addedDirect,baseClose:rnd(baseClose),extraBase:rnd(D.extraUnits*F_CONTRACTS),extraAdded:otherUnits+fdwUnits};
+  var g=1+p.sTotal/100, total=BASE.contracts*g;                       // vendas totais, sem Concierge
+  var directKeep=BASE.directPct/100*total;                             // directas à quota de hoje
+  var addedDirect=rnd(Math.max(0,p.sDirect-BASE.directPct)/100*total); // ganho de penetração
+  var repeatContracts=rnd(Math.max(0,p.sRepeat-BASE.repeatPct)/100*D.cohort*g);
+  var extraKeep=BASE.extrasPer100/100*total;
+  var extraAdded=rnd(Math.max(0,p.sExtras-BASE.extrasPer100)/100*total);
+  var cC=(addedDirect+repeatContracts)*BASE.avgContract*M_CONTRACT, cE=extraAdded*BASE.avgExtra*M_EXTRA, contribution=cC+cE;
+  var direct=rnd(directKeep)+addedDirect;
+  return {total:rnd(total),direct:direct,addedDirect:addedDirect,directGrowth:(direct/BASE.direct-1)*100,repeatContracts:repeatContracts,
+          contracts:rnd(total)+addedDirect+repeatContracts,concierge:addedDirect+repeatContracts,
+          extras:rnd(extraKeep)+extraAdded,extraAdded:extraAdded,cC:cC,cE:cE,contribution:contribution,opex:OPEX,
+          balance:contribution-OPEX};
 }
-var KEYS=Object.keys(PRESETS.referencia);
+var KEYS=['sTotal','sDirect','sRepeat','sExtras'];
 function $(id){return document.getElementById(id);}
 function num(x,d){return Number(x).toLocaleString('de-DE',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
 function eur(x){return (x<0?'−':'')+num(Math.abs(x))+' €';}
 function signed(x){return (x<0?'−':'+')+num(Math.abs(x))+' €';}
-var LABEL={
-  iaVolume:function(v){return '+'+num(v)+'%';}, iaExtras:function(v){return '+'+num(v,1);},
-  iaFDW:function(v){return '+'+num(v)+'%';}, iaRepeat:function(v){return '+'+num(v,1)+' p.p.';},
-  iaExposure:function(v){return num(v)+'%';}, iaMarginContracts:function(v){return num(v)+'%';},
-  iaMarginExtras:function(v){return num(v)+'%';},
-  iaDirect:function(v){return '+'+num(v,1)+' p.p.';}, iaSaving:function(v){return num(v)+' €';},
-  iaOtherOpex:function(v){return num(v)+' € / ano';}
-};
+function pct(x,d){return (x<0?'−':'+')+num(Math.abs(x),d||0)+'%';}
 var NAMES={prudente:'Prudente',referencia:'Referência',ambicioso:'Ambicioso',personalizado:'Personalizado'};
-var current='referencia';
-var VISIBLE={iaVolume:1,iaExtras:1};
+var current='prudente';
 function run(){
-  var p={};KEYS.forEach(function(k){p[k]=+$(k).value;if(VISIBLE[k])$('o-'+k).textContent=LABEL[k](p[k]);});
-  var r=calc(p);
-  $('r-direct').textContent=num(r.directBase+r.addedDirect);
-  $('r-directd').textContent='+'+num(r.addedDirect)+' face a hoje';
-  $('r-global').textContent=num(r.baseClose+r.contracts);
-  $('r-globald').textContent='+'+num(r.contracts)+' contratos';
-  $('r-extras').textContent=num(r.extraBase+r.extraAdded);
-  $('r-extrasd').textContent='+'+num(r.extraAdded)+' extras';
-  var roi=r.opex>0?(r.contribution-r.opex)/r.opex*100:0, mx=Math.max(r.contribution,r.opex,1);
-  $('r-roi').textContent=(roi<0?'−':'+')+num(Math.abs(roi))+'%';
+  var p={};KEYS.forEach(function(k){p[k]=+$(k).value;});
+  var r=calc(p), roi=(r.contribution-r.opex)/r.opex*100, mx=Math.max(r.contribution,r.opex,1);
+  $('o-sTotal').textContent=(p.sTotal?'+'+num(p.sTotal)+'%':'como hoje')+' · '+num(r.total)+' contratos';
+  $('o-sDirect').textContent=num(BASE.directPct,1)+'% → '+num(p.sDirect,1)+'%';
+  $('o-sRepeat').textContent=num(BASE.repeatPct,1)+'% → '+num(p.sRepeat,1)+'%';
+  $('o-sExtras').textContent=num(BASE.extrasPer100,0)+' → '+num(p.sExtras,1);
+  $('r-explain').innerHTML='Passar de <b>'+num(BASE.directPct,1)+'%</b> para <b>'+num(p.sDirect,1)+'%</b> de reservas directas'+(p.sTotal?', com as vendas totais a crescer '+num(p.sTotal)+'%,':'')+' é um crescimento de <b>'+pct(r.directGrowth)+'</b> nas reservas directas: de '+num(BASE.direct)+' para '+num(r.direct)+' por ano. A percentagem mede a rubrica, não as vendas totais.';
+  $('r-direct').textContent=num(r.direct);
+  $('r-directq').textContent='Quota de '+num(BASE.directPct,1)+'% para '+num(p.sDirect,1)+'% das vendas';
+  $('r-directd').textContent=pct(r.directGrowth)+' nas directas';
+  $('r-global').textContent=num(r.contracts);
+  $('r-globald').textContent=(p.sTotal?'+'+num(p.sTotal)+'% de vendas totais, ':'')+'+'+num(r.concierge)+' pelo Concierge';
+  $('r-extras').textContent=num(r.extras);
+  $('r-extrasd').textContent='+'+num(r.extraAdded)+' pelo Concierge';
+  $('r-roi').textContent=pct(roi);
   $('r-roi').style.color=roi<0?'#FFB4A8':'#00F2D7';
   $('r-saldo').textContent='Saldo '+signed(r.balance)+' por ano';
   $('r-saldo').className='pill'+(r.balance>=0?' on':'');
@@ -561,20 +561,21 @@ function run(){
   $('r-cost').textContent=eur(r.opex);
   $('r-retbar').style.width=(r.contribution/mx*100)+'%';
   $('r-costbar').style.width=(r.opex/mx*100)+'%';
-  $('r-saldo24').textContent='Saldo a 24 meses, já com os 28.000 € do investimento inicial: '+signed(r.saldo24)+'.';
-  $('sim-live').textContent='Cenário '+NAMES[current]+': '+num(r.directBase+r.addedDirect)+' reservas directas por ano, mais '+num(r.addedDirect)+' do que hoje; '+num(r.baseClose+r.contracts)+' contratos globais, mais '+num(r.contracts)+'; '+num(r.extraBase+r.extraAdded)+' extras vendidos, mais '+num(r.extraAdded)+'; retorno de '+eur(r.contribution)+' por ano para um custo de '+eur(r.opex)+', ROI de '+(roi<0?'menos ':'')+num(Math.abs(roi))+'%.';
+  $('r-saldo24').textContent=r.balance>0?'Investimento inicial de 28.000 € recuperado em cerca de '+num(Math.ceil(CAPEX/(r.balance/12)))+' meses de fase 2.':'Com estes valores o retorno ainda não cobre o custo anual: é preciso mais penetração.';
+  $('sim-live').textContent='Cenário '+NAMES[current]+': reservas directas de '+num(BASE.directPct,1)+'% para '+num(p.sDirect,1)+'% das vendas, '+num(r.direct)+' por ano; '+num(r.contracts)+' contratos globais; '+num(r.extras)+' extras; retorno de '+eur(r.contribution)+' por ano para um custo de '+eur(r.opex)+', ROI de '+(roi<0?'menos ':'')+num(Math.abs(roi))+'%.';
 }
-function setPreset(name){
-  current=name;KEYS.forEach(function(k){$(k).value=PRESETS[name][k];});
+function setPreset(name,keepTotal){
+  var tot=$('sTotal').value;current=name;KEYS.forEach(function(k){$(k).value=PRESETS[name][k];});
+  if(keepTotal)$('sTotal').value=tot;
   document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.preset===name?'true':'false');});
   run();
 }
-document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){setPreset(b.dataset.preset);});});
-KEYS.forEach(function(k){if(!VISIBLE[k])return;$(k).addEventListener('input',function(){current='personalizado';
-  document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed','false');});run();});});
-$('iaReset').addEventListener('click',function(){setPreset('referencia');});
+document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){setPreset(b.dataset.preset,true);});});
+KEYS.forEach(function(k){$(k).addEventListener('input',function(){if(k!=='sTotal'){current='personalizado';
+  document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed','false');});}run();});});
+$('iaReset').addEventListener('click',function(){setPreset('prudente');});
 $('simToggle').addEventListener('click',function(){var b=$('simBox'),o=b.hidden;b.hidden=!o;this.setAttribute('aria-expanded',o?'true':'false');this.textContent=o?'Fechar o simulador':'Abrir o simulador';});
-setPreset('referencia');
+setPreset('prudente');
 
 // Gráfico de contratos por mês
 (function(){
