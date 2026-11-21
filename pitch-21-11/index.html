@@ -193,6 +193,7 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
     <a href="#tecnica"><span>7</span>Análise técnica</a>
     <a href="#decisao"><span>8</span>Pedido de aprovação</a>
   </nav>
+  <button type="button" id="fsBtn" aria-pressed="false" style="align-self:flex-start;background:#00F2D7;color:#05141F;border:0;border-radius:6px;padding:10px 14px;font:600 14px Inter,Arial,sans-serif;cursor:pointer">Ecrã inteiro (tecla F)</button>
   <p class="tag"><b>Use a car.<br>Plug&amp;Play Platform.</b>To enhance the incredible “everydays” of millions.</p>
 </header>
 
@@ -220,8 +221,12 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
   </div>
   <div class="tile" style="margin-top:18px;border-left:4px solid var(--cyan)">
     <h3>Os turistas voltam a Portugal. Ainda não voltam a nós.</h3>
-    <p class="d" style="margin-top:8px"><b>66%</b> dos visitantes de Portugal são repetentes, segundo o Turismo de Portugal. Na ICONIQ, só <b>3,2%</b> dos clientes repetem. O cliente regressa ao país, mas não tem razão para nos procurar outra vez: é esse o espaço que o Concierge quer ocupar.</p>
+    <p class="d" style="margin-top:8px"><b>66%</b> dos visitantes de Portugal são repetentes, segundo o Turismo de Portugal. Na ICONIQ, só <b>3,2%</b> dos clientes repetem. O cliente regressa ao país, mas não tem razão para nos procurar outra vez.</p>
     <p class="note" style="margin-top:8px">Fonte: Turismo de Portugal e MINDHAUS, Travel Sentiment Monitor, 3.ª vaga, Junho de 2026 (divulgado pela Publituris a 22/06/2026). Os dois números não medem o mesmo: um é sobre o destino, o outro sobre a nossa empresa.</p>
+  </div>
+  <div style="margin-top:18px;background:#05141F;border-radius:10px;padding:clamp(28px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(24px,4vw,56px)">
+    <p style="margin:0;flex:1 1 420px;font:700 clamp(34px,5.2vw,76px)/1.05 var(--display);letter-spacing:-.02em;color:#00F2D7">É esse o espaço que o Concierge quer ocupar.</p>
+    <img src="concierge_logo.png" alt="Concierge by ICONIQ" style="flex:0 1 300px;width:300px;max-width:100%;height:auto;display:block">
   </div>
 </section>
 
@@ -617,6 +622,27 @@ var J=[
   J.forEach(function(m,i){var b=document.createElement('button');b.type='button';if(m[2]==='Em produção')b.className='live';
     b.innerHTML='<small>'+(i+1)+'</small>'+m[0];b.addEventListener('click',function(){show(i);});box.appendChild(b);});
   show(1);
+})();
+
+// Ecrã inteiro: botão e tecla F; setas esquerda e direita saltam entre blocos
+(function(){
+  var b=$('fsBtn'),d=document;
+  function on(){return !!(d.fullscreenElement||d.webkitFullscreenElement);}
+  function toggle(){var e=d.documentElement;
+    if(on()){(d.exitFullscreen||d.webkitExitFullscreen).call(d);}
+    else{(e.requestFullscreen||e.webkitRequestFullscreen).call(e);}}
+  function sync(){b.setAttribute('aria-pressed',on()?'true':'false');b.textContent=on()?'Sair do ecrã inteiro (tecla F)':'Ecrã inteiro (tecla F)';}
+  b.addEventListener('click',toggle);
+  d.addEventListener('fullscreenchange',sync);d.addEventListener('webkitfullscreenchange',sync);
+  d.addEventListener('keydown',function(ev){
+    var t=ev.target.tagName;if(t==='INPUT'||t==='SELECT'||t==='TEXTAREA'||t==='VIDEO'||ev.ctrlKey||ev.metaKey||ev.altKey)return;
+    if(ev.key==='f'||ev.key==='F'){ev.preventDefault();toggle();return;}
+    if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){
+      var secs=[].slice.call(d.querySelectorAll('main section')),y=window.scrollY+150,idx=0;
+      secs.forEach(function(x,i){if(x.offsetTop<=y)idx=i;});
+      var n=Math.max(0,Math.min(secs.length-1,idx+(ev.key==='ArrowRight'?1:-1)));
+      ev.preventDefault();window.scrollTo(0,secs[n].offsetTop-20);}
+  });
 })();
 
 // Navegação: marca o bloco visível
