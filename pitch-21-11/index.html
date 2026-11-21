@@ -387,64 +387,35 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
   </div>
   <p class="note">O que falta provar: no cenário de referência o serviço ainda não cobre o custo anual de manutenção; com a meta de repetição passa a cobrir. Por isso pedimos só a fase 1 e medimos antes de avançar.</p>
 
-  <details style="margin-top:22px">
-  <summary style="cursor:pointer;font:600 17px Inter,Arial,sans-serif;padding:12px 0">Abrir o simulador de cenários</summary>
-  <div class="sim" aria-labelledby="h-sim">
-    <h3 id="h-sim">Simulador: onde o serviço paga o custo de escala</h3>
-    <div style="margin:4px 0 18px;padding:14px 16px;border:1px solid #33454F;border-radius:12px">
-      <p style="margin:0 0 6px;font-weight:600;color:#fff">Como ler o simulador</p>
-      <ul style="margin:0;padding-left:18px;line-height:1.55;font-size:14px;color:#D5DEE3">
-        <li>Cada percentagem aplica-se à base actual do indicador, não à receita total de 4,63 M€.</li>
-        <li><b>Direct Bookings:</b> crescem sobre os 605 contratos directos de hoje, cerca de 690 num ano. Mais 25% são cerca de 172 contratos, não um quarto do negócio.</li>
-        <li><b>Repetição:</b> sobre os 9.043 clientes da coorte de 2025.</li>
-        <li><b>Extras e coberturas:</b> unidades a mais sobre os contratos fechados do ano; nas coberturas, só entre quem ainda não as tem.</li>
-        <li><b>Abrangência:</b> tudo é multiplicado pela parte dos clientes que o Concierge alcança. Na referência, 65%: os 172 contratos passam a 112.</li>
-        <li>Os resultados são o que se acrescenta ao que a ICONIQ já faz. Na referência, a receita adicional é de cerca de 68.000 €, 1,3% da receita anual.</li>
-        <li><b>Meta 2027:</b> igual à referência, mas com a repetição a subir de 3,2% para 10% (mais 6,8 pontos). O saldo anual passa a cerca de +10.000 €.</li>
-        <li><b>Canal directo:</b> cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</li>
-      </ul>
-    </div>
+  <p style="margin-top:22px"><button type="button" id="simToggle" aria-expanded="false" aria-controls="simBox" style="background:#05141F;color:#fff;border:0;border-radius:6px;padding:12px 18px;font:600 15px Inter,Arial,sans-serif;cursor:pointer">Abrir o simulador</button></p>
+  <div class="sim" id="simBox" aria-labelledby="h-sim" hidden>
+    <h3 id="h-sim">Simulador: reservas directas, contratos e extras</h3>
+    <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Escolha um cenário ou mexa nos dois controlos. Os valores são anuais e comparam com a base de hoje (WheelSys, Janeiro a Outubro de 2026, anualizada).</p>
     <div class="presets" role="group" aria-label="Cenários">
-      <button type="button" data-preset="prudente" aria-pressed="false">Prudente · Direct Bookings +10%</button>
+      <button type="button" data-preset="prudente" aria-pressed="false">Prudente · directas +10%</button>
       <button type="button" data-preset="referencia" aria-pressed="true">Referência · +25%</button>
       <button type="button" data-preset="ambicioso" aria-pressed="false">Ambicioso · +50%</button>
-      <button type="button" data-preset="meta" aria-pressed="false">Meta 2027 · repetição 10%</button>
     </div>
     <div class="simgrid">
       <div class="ctl">
-        <div><label for="iaVolume">Crescimento de Direct Bookings <output id="o-iaVolume"></output></label><input id="iaVolume" type="range" min="0" max="100" step="5"></div>
-        <div><label for="iaExtras">Extras adicionais · unidades por 100 contratos <output id="o-iaExtras"></output></label><input id="iaExtras" type="range" min="0" max="12" step="0.5"></div>
-        <div><label for="iaFDW">Coberturas · conversão adicional (exemplo FDW) <output id="o-iaFDW"></output></label><input id="iaFDW" type="range" min="0" max="100" step="1"></div>
-        <div><label for="iaRepeat">Repetição · melhoria <output id="o-iaRepeat"></output></label><input id="iaRepeat" type="range" min="0" max="8" step="0.1"></div>
-        <div><label for="iaDirect">Transferência adicional para canal próprio <output id="o-iaDirect"></output></label><input id="iaDirect" type="range" min="0" max="8" step="0.5"></div>
-        <div><label for="iaExposure">Abrangência do Concierge (hipótese) <output id="o-iaExposure"></output></label><input id="iaExposure" type="range" min="0" max="100" step="5"></div>
-        <div><label for="iaMarginContracts">Margem contributiva dos contratos <output id="o-iaMarginContracts"></output></label><input id="iaMarginContracts" type="range" min="0" max="70" step="5"></div>
-        <div><label for="iaMarginExtras">Margem contributiva dos extras <output id="o-iaMarginExtras"></output></label><input id="iaMarginExtras" type="range" min="0" max="90" step="5"></div>
-        <div><label for="iaSaving">Poupança por contrato transferido <output id="o-iaSaving"></output></label><input id="iaSaving" type="range" min="0" max="100" step="5"></div>
-        <div><label for="iaOtherOpex">Custo anual total de escala <output id="o-iaOtherOpex"></output></label><input id="iaOtherOpex" type="number" min="0" step="100" style="width:100%;margin-top:6px;padding:8px 10px;border-radius:8px;border:1px solid #33454F;background:#0B1F2B;color:#fff;font:500 15px Inter,Arial,sans-serif"></div>
+        <div><label for="iaVolume">Crescimento das reservas directas <output id="o-iaVolume"></output></label><input id="iaVolume" type="range" min="0" max="100" step="5"></div>
+        <div><label for="iaExtras">Extras a mais · unidades por 100 contratos <output id="o-iaExtras"></output></label><input id="iaExtras" type="range" min="0" max="12" step="0.5"></div>
+        <div hidden>
+          <input id="iaFDW" type="hidden"><input id="iaRepeat" type="hidden"><input id="iaDirect" type="hidden"><input id="iaExposure" type="hidden"><input id="iaMarginContracts" type="hidden"><input id="iaMarginExtras" type="hidden"><input id="iaSaving" type="hidden"><input id="iaOtherOpex" type="hidden">
+        </div>
         <div><button type="button" id="iaReset" style="padding:9px 14px;border-radius:999px;border:1px solid #33454F;background:transparent;color:#fff;font:500 14px Inter,Arial,sans-serif;cursor:pointer">Repor o cenário de referência</button></div>
       </div>
       <div>
         <div class="out">
-          <div class="wide"><div><p class="k">Saldo anual, depois do custo de escala de <span id="r-opex"></span></p><p class="v" id="r-balance"></p></div><span class="pill" id="r-verdict"></span></div>
-          <div><p class="k">Contratos adicionais por ano</p><p class="v" id="r-contracts"></p></div>
-          <div><p class="k">Contribuição anual</p><p class="v" id="r-contrib"></p></div>
-          <div><p class="k">Receita adicional</p><p class="v" id="r-revenue"></p></div>
-          <div><p class="k">Saldo a 24 meses, com os 28.000 €</p><p class="v" id="r-24"></p></div>
-          <div><p class="k">Contratos transferidos para canal próprio</p><p class="v" id="r-shift"></p></div>
-          <div><p class="k">Poupança na transferência</p><p class="v" id="r-save"></p></div>
-        </div>
-        <div class="mix" aria-hidden="true">
-          <p>De onde vem a contribuição</p>
-          <div class="row"><span>Contratos novos</span><div><b id="m-c"></b></div><span id="m-cv"></span></div>
-          <div class="row"><span>Extras</span><div><b id="m-e"></b></div><span id="m-ev"></span></div>
+          <div class="wide"><div><p class="k">Reservas directas por ano</p><p class="v" id="r-direct"></p></div><span class="pill on" id="r-directd"></span></div>
+          <div><p class="k">Contratos globais por ano</p><p class="v" id="r-global"></p><p class="k" id="r-globald" style="margin-top:6px"></p></div>
+          <div><p class="k">Extras vendidos por ano</p><p class="v" id="r-extras"></p><p class="k" id="r-extrasd" style="margin-top:6px"></p></div>
         </div>
         <p class="sr" id="sim-live" aria-live="polite"></p>
       </div>
     </div>
-    <p class="fine">São hipóteses, não resultados. A base vem do WheelSys, de Janeiro a Outubro de 2026, anualizada; os incrementos assentam no benchmark e nos objectivos definidos pelo grupo. O simulador não mede causalidade: por isso propomos activar o custo de escala só depois de medir.</p>
+    <p class="fine">São hipóteses, não resultados. Hoje: cerca de 690 reservas directas, 18.579 contratos e 9.301 extras por ano. Os cenários incluem também as hipóteses de repetição e de abrangência do Concierge definidas pelo grupo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
   </div>
-  </details>
 </section>
 
 <section id="tecnica" aria-labelledby="h-tecnica">
@@ -532,8 +503,7 @@ var F_CONTRACTS=1.14,F_REVENUE=1.09,DIRECT_10M=605,FDW_COVER=0.605,OPEX=48000,CA
 var PRESETS={
   prudente:{iaVolume:10,iaExtras:1,iaFDW:1,iaRepeat:0.2,iaDirect:0.5,iaExposure:50,iaMarginContracts:25,iaMarginExtras:50,iaSaving:0,iaOtherOpex:48000},
   referencia:{iaVolume:25,iaExtras:2,iaFDW:2,iaRepeat:0.5,iaDirect:1,iaExposure:65,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000},
-  ambicioso:{iaVolume:50,iaExtras:4,iaFDW:4,iaRepeat:1,iaDirect:2,iaExposure:80,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000},
-  meta:{iaVolume:25,iaExtras:2,iaFDW:2,iaRepeat:6.8,iaDirect:1,iaExposure:65,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000}
+  ambicioso:{iaVolume:50,iaExtras:4,iaFDW:4,iaRepeat:1,iaDirect:2,iaExposure:80,iaMarginContracts:30,iaMarginExtras:55,iaSaving:0,iaOtherOpex:48000}
 };
 function rnd(x){return Math.round(Math.max(0,x));}
 function calc(p){
@@ -549,7 +519,8 @@ function calc(p){
   var shifted=rnd(baseClose*ex*p.iaDirect/100), savings=shifted*p.iaSaving, opex=p.iaOtherOpex;
   var cC=revC*p.iaMarginContracts/100, cE=revE*p.iaMarginExtras/100, contribution=cC+cE+savings;
   return {contracts:addedDirect+repeatContracts,revenue:revC+revE,cC:cC,cE:cE,contribution:contribution,shifted:shifted,savings:savings,opex:opex,
-          balance:contribution-opex,saldo24:2*(contribution-opex)-CAPEX};
+          balance:contribution-opex,saldo24:2*(contribution-opex)-CAPEX,
+          directBase:rnd(directBase),addedDirect:addedDirect,baseClose:rnd(baseClose),extraBase:rnd(D.extraUnits*F_CONTRACTS),extraAdded:otherUnits+fdwUnits};
 }
 var KEYS=Object.keys(PRESETS.referencia);
 function $(id){return document.getElementById(id);}
@@ -564,24 +535,19 @@ var LABEL={
   iaDirect:function(v){return '+'+num(v,1)+' p.p.';}, iaSaving:function(v){return num(v)+' €';},
   iaOtherOpex:function(v){return num(v)+' € / ano';}
 };
-var NAMES={prudente:'Prudente',referencia:'Referência',ambicioso:'Ambicioso',meta:'Meta 2027',personalizado:'Personalizado'};
+var NAMES={prudente:'Prudente',referencia:'Referência',ambicioso:'Ambicioso',personalizado:'Personalizado'};
 var current='referencia';
+var VISIBLE={iaVolume:1,iaExtras:1};
 function run(){
-  var p={};KEYS.forEach(function(k){p[k]=+$(k).value;$('o-'+k).textContent=LABEL[k](p[k]);});
+  var p={};KEYS.forEach(function(k){p[k]=+$(k).value;if(VISIBLE[k])$('o-'+k).textContent=LABEL[k](p[k]);});
   var r=calc(p);
-  $('r-balance').textContent=signed(r.balance);
-  $('r-contracts').textContent='+'+num(r.contracts);
-  $('r-contrib').textContent=eur(r.contribution);
-  $('r-revenue').textContent=eur(r.revenue);
-  $('r-24').textContent=signed(r.saldo24);
-  $('r-opex').textContent=eur(r.opex);$('r-shift').textContent=num(r.shifted);$('r-save').textContent=eur(r.savings);
-  var ok=r.balance>=0,v=$('r-verdict');
-  v.textContent=ok?'Paga o custo de escala':'Ainda não paga';
-  v.className='pill '+(ok?'on':'warn');
-  var cap=Math.max(1,r.cC,r.cE);
-  $('m-c').style.width=(r.cC/cap*100).toFixed(1)+'%';$('m-e').style.width=(r.cE/cap*100).toFixed(1)+'%';
-  $('m-cv').textContent=eur(r.cC);$('m-ev').textContent=eur(r.cE);
-  $('sim-live').textContent='Cenário '+NAMES[current]+': contribuição anual de '+eur(r.contribution)+', saldo anual de '+signed(r.balance)+'. '+(ok?'Paga o custo de escala.':'Ainda não paga o custo de escala.')+' Contratos novos '+eur(r.cC)+', extras '+eur(r.cE)+'.';
+  $('r-direct').textContent=num(r.directBase+r.addedDirect);
+  $('r-directd').textContent='+'+num(r.addedDirect)+' face a hoje';
+  $('r-global').textContent=num(r.baseClose+r.contracts);
+  $('r-globald').textContent='+'+num(r.contracts)+' contratos';
+  $('r-extras').textContent=num(r.extraBase+r.extraAdded);
+  $('r-extrasd').textContent='+'+num(r.extraAdded)+' extras';
+  $('sim-live').textContent='Cenário '+NAMES[current]+': '+num(r.directBase+r.addedDirect)+' reservas directas por ano, mais '+num(r.addedDirect)+' do que hoje; '+num(r.baseClose+r.contracts)+' contratos globais, mais '+num(r.contracts)+'; '+num(r.extraBase+r.extraAdded)+' extras vendidos, mais '+num(r.extraAdded)+'.';
 }
 function setPreset(name){
   current=name;KEYS.forEach(function(k){$(k).value=PRESETS[name][k];});
@@ -589,9 +555,10 @@ function setPreset(name){
   run();
 }
 document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){setPreset(b.dataset.preset);});});
-KEYS.forEach(function(k){$(k).addEventListener('input',function(){current='personalizado';
+KEYS.forEach(function(k){if(!VISIBLE[k])return;$(k).addEventListener('input',function(){current='personalizado';
   document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed','false');});run();});});
 $('iaReset').addEventListener('click',function(){setPreset('referencia');});
+$('simToggle').addEventListener('click',function(){var b=$('simBox'),o=b.hidden;b.hidden=!o;this.setAttribute('aria-expanded',o?'true':'false');this.textContent=o?'Fechar o simulador':'Abrir o simulador';});
 setPreset('referencia');
 
 // Gráfico de contratos por mês
