@@ -180,13 +180,14 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
 /* Modo apresentação: uma página de cada vez */
 body.pres{overflow:hidden}
 body.pres main{height:100vh;box-sizing:border-box;overflow:hidden;padding:30px clamp(18px,4vw,64px) 50px}
-body.pres main section{padding:0;border-top:0}
+body.pres main{display:flex;flex-direction:column;justify-content:center}
+body.pres main section{padding:0;border-top:0;flex:0 0 auto}
 body.pres .pres-hide{display:none!important}
 #presBar{display:none;position:fixed;right:18px;bottom:10px;z-index:20;align-items:center;gap:8px;background:#05141F;color:#fff;border-radius:99px;padding:5px 8px;font:600 13px/1 Inter,Arial,sans-serif;font-variant-numeric:tabular-nums}
 body.pres #presBar{display:flex}
 #presBar button{width:30px;height:30px;border-radius:50%;border:1px solid #3A4B57;background:transparent;color:#fff;font:600 16px/1 Inter,Arial,sans-serif;cursor:pointer}
 #presBar button:hover{background:#00F2D7;color:#05141F;border-color:#00F2D7}
-@media (max-width:780px){body.pres{overflow:auto}body.pres main{height:auto;overflow:visible}}
+@media (max-width:780px){body.pres{overflow:auto}body.pres main{height:auto;overflow:visible;display:block}}
 @media(min-width:901px){#caminhos{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:stretch}}</style>
 </head>
 <body>
@@ -555,6 +556,8 @@ function signed(x){return (x<0?'−':'+')+num(Math.abs(x))+' €';}
     cur=Math.max(0,Math.min(pages.length-1,n));var pg=pages[cur];
     secs.forEach(function(s){var is=s===pg.sec;s.classList.toggle('pres-hide',!is);s.style.zoom=is&&pg.zoom<1?pg.zoom:'';
       if(is)[].forEach.call(s.children,function(c){c.classList.toggle('pres-hide',c!==pg.head&&pg.items.indexOf(c)<0);});});
+    var cs=getComputedStyle(main),avail=main.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),z=pg.zoom;   // ajuste fino: a página tem de caber inteira
+    for(var k=0;k<4;k++){var h=pg.sec.getBoundingClientRect().height;if(h<=avail+1)break;z=z*avail/h*0.995;pg.sec.style.zoom=z;}
     [].forEach.call(d.querySelectorAll('main video'),function(v){if(!v.offsetParent&&!v.paused)v.pause();});
     links.forEach(function(a){if(a.getAttribute('href')==='#'+pg.sec.id)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
     $('presCount').textContent=(cur+1)+' / '+pages.length;
