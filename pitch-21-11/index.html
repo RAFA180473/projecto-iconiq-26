@@ -318,12 +318,6 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
 <figure style="margin:0"><img src="j8.jpg" alt="8 · Avaliação e fidelização: Avaliações, relacionamento e o convite para voltar." style="width:100%;border-radius:12px;display:block"><figcaption style="margin-top:8px"><b>8 · Avaliação e fidelização</b><br><span class="note">Avaliações, relacionamento e o convite para voltar.</span></figcaption></figure>
   </div>
   <p class="note">Imagens ilustrativas, geradas por IA. Hoje está em produção a reserva.</p>
-  <h3 style="margin-top:36px">Brokers: complementar, não concorrer</h3>
-  <div class="grid g3">
-    <div class="tile dark"><p class="k">Onde estamos</p><p class="v">96 em 100</p><p class="d">contratos chegam por brokers e intermediários. São eles que nos trazem o cliente, e vão continuar a ser.</p></div>
-    <div class="tile"><h3>A regra</h3><p class="d" style="margin-top:8px">O canal directo nunca é mais barato do que o broker. Não concorremos com os parceiros pelo preço.</p></div>
-    <div class="tile"><h3>O que o Concierge faz</h3><p class="d" style="margin-top:8px">Serve todos os clientes depois da reserva, venham de onde vierem. Melhor serviço dá melhor avaliação, também no broker. A relação directa nasce de o cliente querer voltar.</p></div>
-  </div>
 </section>
 
 <section id="governance" aria-labelledby="h-governance">
@@ -378,42 +372,20 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
     <p style="margin:0;font:700 clamp(30px,4.6vw,64px)/1.08 var(--display);letter-spacing:-.02em;color:#00F2D7">Crescer em margem, com as mesmas pessoas, focadas no cliente.</p>
     <p style="margin:18px 0 0;font:500 clamp(18px,1.9vw,24px)/1.4 Inter,Arial,sans-serif;color:#fff">Não imputamos custos em estrutura. Investimos na tecnologia que mantém o nível de serviço, em qualquer época do ano.</p>
   </div>
-  <p class="note">O que falta provar: o retorno depende de ganhar penetração nas reservas directas, na repetição e nos extras. Por isso pedimos só a fase 1 e medimos antes de avançar.</p>
+  <p class="note">O que falta provar: o retorno depende de levar os clientes que repetem de 3,2% para 10%. Por isso pedimos só a fase 1 e medimos antes de avançar.</p>
 
-  <p style="margin-top:22px"><button type="button" id="simToggle" aria-expanded="false" aria-controls="simBox" style="background:#05141F;color:#fff;border:0;border-radius:6px;padding:12px 18px;font:600 15px Inter,Arial,sans-serif;cursor:pointer">Abrir o simulador</button></p>
-  <div class="sim" id="simBox" aria-labelledby="h-sim" hidden>
-    <h3 id="h-sim">Simulador: vendas totais, penetração e ROI</h3>
-    <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Escolha um cenário ou mexa nos controlos. Os valores são anuais e partem da base de hoje (WheelSys, Janeiro a Outubro de 2026, anualizada). O Concierge mede-se pela penetração: a parte das vendas que passa a ser directa, a repetir ou a levar extras.</p>
-    <div class="presets" role="group" aria-label="Cenários">
-      <button type="button" data-preset="prudente" aria-pressed="true">Prudente · directas a 5%</button>
-      <button type="button" data-preset="referencia" aria-pressed="false">Referência · directas a 6%</button>
-      <button type="button" data-preset="ambicioso" aria-pressed="false">Ambicioso · directas a 7,4%</button>
-    </div>
-    <div class="simgrid">
-      <div class="ctl">
-        <p class="k" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#00F2D7;margin:0">1 · Vendas totais da ICONIQ</p>
-        <div><label for="sTotal">Crescimento das vendas totais <output id="o-sTotal"></output></label><input id="sTotal" type="range" min="0" max="15" step="1"></div>
-        <p class="k" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#00F2D7;margin:10px 0 0">2 · Penetração com o Concierge</p>
-        <div><label for="sDirect">Reservas directas · % das vendas <output id="o-sDirect"></output></label><input id="sDirect" type="range" min="3.7" max="10" step="0.1"></div>
-        <div><label for="sRepeat">Clientes que repetem · % <output id="o-sRepeat"></output></label><input id="sRepeat" type="range" min="3.2" max="12" step="0.1"></div>
-        <div><label for="sExtras">Extras · unidades por 100 contratos <output id="o-sExtras"></output></label><input id="sExtras" type="range" min="50" max="65" step="0.5"></div>
-        <div><button type="button" id="iaReset" style="padding:9px 14px;border-radius:999px;border:1px solid #33454F;background:transparent;color:#fff;font:500 14px Inter,Arial,sans-serif;cursor:pointer">Repor o cenário prudente</button></div>
-        <p id="r-explain" style="margin:4px 0 0;font-size:14px;line-height:1.5;color:#D5DEE3;background:#0E2330;border-left:3px solid #00F2D7;border-radius:6px;padding:12px 14px"></p>
+  <div class="sim" id="roiBox" aria-labelledby="h-roi">
+    <h3 id="h-roi">Retorno do investimento esperado · cenário conservador</h3>
+    <p style="margin:4px 0 18px;font-size:14px;line-height:1.55;color:#D5DEE3">Clientes que repetem a passar de 3,2% para 10%, com um aumento global de 15% na facturação.</p>
+    <div class="simgrid" style="align-items:center">
+      <div style="background:#0E2330;border-radius:6px;padding:26px">
+        <p style="margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#B9C6CD">ROI anual esperado</p>
+        <p style="margin:10px 0 0;font:700 clamp(52px,7vw,96px)/1 var(--display);color:#00F2D7;letter-spacing:-.02em">+19%</p>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.5;color:#fff">57.334 € de retorno para 48.000 € de custo, por ano.</p>
       </div>
-      <div>
-        <div class="out">
-          <div class="wide"><div><p class="k">Reservas directas por ano</p><p class="v" id="r-direct"></p><p class="k" id="r-directq" style="margin-top:6px"></p></div><span class="pill on" id="r-directd"></span></div>
-          <div><p class="k">Contratos globais por ano</p><p class="v" id="r-global"></p><p class="k" id="r-globald" style="margin-top:6px"></p></div>
-          <div><p class="k">Extras vendidos por ano</p><p class="v" id="r-extras"></p><p class="k" id="r-extrasd" style="margin-top:6px"></p></div>
-          <div class="wide"><div><p class="k">ROI anual · retorno face ao custo</p><p class="v" id="r-roi"></p></div><span class="pill" id="r-saldo"></span></div>
-          <div><p class="k">Retorno por ano (margem)</p><p class="v" id="r-ret"></p><div style="height:8px;background:#1B3442;border-radius:99px;margin-top:10px;padding:0;overflow:hidden"><div id="r-retbar" style="height:8px;background:#00F2D7;border-radius:99px;padding:0;width:0"></div></div></div>
-          <div><p class="k">Custo por ano</p><p class="v" id="r-cost"></p><div style="height:8px;background:#1B3442;border-radius:99px;margin-top:10px;padding:0;overflow:hidden"><div id="r-costbar" style="height:8px;background:#B9C6CD;border-radius:99px;padding:0;width:0"></div></div></div>
-          <div class="wide" style="padding:12px 16px"><p class="k" id="r-saldo24"></p></div>
-        </div>
-        <p class="sr" id="sim-live" aria-live="polite"></p>
-      </div>
+      <div style="overflow-x:auto"><table aria-labelledby="h-roi" style="width:100%;border-collapse:collapse;font-size:15px"><tbody><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Clientes que repetem</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">3,2% → 10%</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Facturação global da ICONIQ</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">+15%</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Contratos de clientes repetidos, a mais por ano</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">704</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Facturação adicional desses contratos (271 € por contrato)</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">191.112 €</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Retorno por ano (margem de 30%)</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">57.334 €</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Custo por ano (fase 2, manutenção)</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">48.000 €</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">Saldo por ano</th><td style="text-align:right;white-space:nowrap;font:600 17px var(--display);color:#fff;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">+9.334 €</td></tr><tr><th scope="row" style="text-align:left;font-weight:400;color:#D5DEE3;padding:13px 10px;border-bottom:1px solid #22384A">ROI anual esperado</th><td style="text-align:right;white-space:nowrap;font:700 17px var(--display);color:#00F2D7;font-variant-numeric:tabular-nums;padding:13px 10px;border-bottom:1px solid #22384A">+19%</td></tr></tbody></table></div>
     </div>
-    <p class="fine">São hipóteses, não resultados. Hoje: 3,7% de reservas directas (cerca de 690 em 18.579 contratos), 3,2% de clientes que repetem e 50 extras por 100 contratos. O crescimento das vendas totais não conta como retorno do Concierge: só conta o ganho de penetração. Retorno = margem dos contratos directos e repetidos a mais (30%) e dos extras a mais (55%); custo = 48.000 € por ano da fase 2; ROI = (retorno − custo) ÷ custo. O canal directo cresce pela repetição e pelo serviço, nunca por preço abaixo do broker.</p>
+    <p class="fine">É uma hipótese, não um resultado. Só o ganho de repetição conta como retorno do Concierge; o aumento global de 15% na facturação é o contexto e não entra no retorno. Base: 9.043 clientes e 3,2% de repetição (coorte de 2025), 271 € de facturação média por contrato (WheelSys, Janeiro a Outubro de 2026, anualizado). ROI = (retorno − custo) ÷ custo. Com este saldo, os 28.000 € do investimento inicial recuperam-se em cerca de 36 meses de fase 2.</p>
   </div>
 </section>
 
@@ -468,7 +440,7 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
     <div class="tile dark"><p class="k">Linguagem natural</p><h3 style="margin-top:10px">Conversa com o cliente</h3><ul class="plain"><li>Modelos de linguagem e engenharia de prompts</li><li>Respostas na língua do cliente</li></ul></div>
     <div class="tile"><p class="k">Governação</p><h3 style="margin-top:10px">Implementação controlada</h3><ul class="plain"><li>Segurança e supervisão humana</li><li>Formação e gestão da mudança</li></ul></div>
   </div>
-  <p class="note">Como analisámos os dados: contratos, receita e extras do WheelSys e inquéritos de satisfação da Customer Verdict, lidos por estação e por mês, com comparação homóloga. Os cenários do simulador são hipóteses de crescimento sobre os valores actuais, não previsões. Como vamos medir os resultados: grupo de controlo em Lisboa, com a repetição, os Direct Bookings e a margem acrescentada revistos por trimestre.</p>
+  <p class="note">Como analisámos os dados: contratos, receita e extras do WheelSys e inquéritos de satisfação da Customer Verdict, lidos por estação e por mês, com comparação homóloga. O cenário de retorno é uma hipótese de crescimento sobre os valores actuais, não uma previsão. Como vamos medir os resultados: grupo de controlo em Lisboa, com a repetição, os Direct Bookings e a margem acrescentada revistos por trimestre.</p>
   <h3 style="margin-top:34px">A nossa visão da jornada futura</h3>
   <div class="grid g2">
     <figure style="margin:0"><img src="ambientador.jpg" alt="Interior de um carro elétrico com a bateria a 15% e um pequeno ambientador do Concierge na ventilação, com código QR e as frases Respire fundo. Estamos aqui. e Breathe easy. We are here." style="width:100%;border-radius:14px;display:block"><figcaption class="note" style="margin-top:10px">Bateria a 15%. O cliente lê o código no ambientador.</figcaption></figure>
@@ -503,79 +475,14 @@ footer{margin-top:40px;font-size:13px;color:var(--soft);max-width:90ch}
 </div>
 
 <script>
-// Dados observados (WheelSys, Jan–Out 2026) e modelo do simulador v7.8 do Grupo 5.
+// Dados observados (WheelSys, Jan–Out 2026).
 var D={rows:[["Jan",419],["Fev",894],["Mar",1243],["Abr",1487],["Mai",1810],["Jun",1921],["Jul",2205],["Ago",2111],["Set",2278],["Out",2081]],
   closed:16297,totalRevenue:4627023.52,extraRevenue:570945.16,extraUnits:8159,fdwUnits:462,fdwRevenue:66840.87,cohort:9043};
-var F_CONTRACTS=1.14,F_REVENUE=1.09,DIRECT_10M=605,OPEX=48000,CAPEX=28000,REPEAT_N=292,M_CONTRACT=0.30,M_EXTRA=0.55;
-var BASE=(function(){var bc=D.closed*F_CONTRACTS,db=DIRECT_10M*F_CONTRACTS,eb=D.extraUnits*F_CONTRACTS;
-  return {contracts:bc,direct:db,directPct:db/bc*100,repeatPct:REPEAT_N/D.cohort*100,extras:eb,extrasPer100:eb/bc*100,
-          avgContract:D.totalRevenue*F_REVENUE/bc,avgExtra:D.extraRevenue/D.extraUnits};})();
-var PRESETS={
-  prudente:{sTotal:0,sDirect:5,sRepeat:5,sExtras:53},
-  referencia:{sTotal:0,sDirect:6,sRepeat:6.5,sExtras:55},
-  ambicioso:{sTotal:0,sDirect:7.4,sRepeat:10,sExtras:58}
-};
 function rnd(x){return Math.round(Math.max(0,x));}
-function calc(p){
-  var g=1+p.sTotal/100, total=BASE.contracts*g;                       // vendas totais, sem Concierge
-  var directKeep=BASE.directPct/100*total;                             // directas à quota de hoje
-  var addedDirect=rnd(Math.max(0,p.sDirect-BASE.directPct)/100*total); // ganho de penetração
-  var repeatContracts=rnd(Math.max(0,p.sRepeat-BASE.repeatPct)/100*D.cohort*g);
-  var extraKeep=BASE.extrasPer100/100*total;
-  var extraAdded=rnd(Math.max(0,p.sExtras-BASE.extrasPer100)/100*total);
-  var cC=(addedDirect+repeatContracts)*BASE.avgContract*M_CONTRACT, cE=extraAdded*BASE.avgExtra*M_EXTRA, contribution=cC+cE;
-  var direct=rnd(directKeep)+addedDirect;
-  return {total:rnd(total),direct:direct,addedDirect:addedDirect,directGrowth:(direct/BASE.direct-1)*100,repeatContracts:repeatContracts,
-          contracts:rnd(total)+addedDirect+repeatContracts,concierge:addedDirect+repeatContracts,
-          extras:rnd(extraKeep)+extraAdded,extraAdded:extraAdded,cC:cC,cE:cE,contribution:contribution,opex:OPEX,
-          balance:contribution-OPEX};
-}
-var KEYS=['sTotal','sDirect','sRepeat','sExtras'];
 function $(id){return document.getElementById(id);}
 function num(x,d){return Number(x).toLocaleString('de-DE',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
 function eur(x){return (x<0?'−':'')+num(Math.abs(x))+' €';}
 function signed(x){return (x<0?'−':'+')+num(Math.abs(x))+' €';}
-function pct(x,d){return (x<0?'−':'+')+num(Math.abs(x),d||0)+'%';}
-var NAMES={prudente:'Prudente',referencia:'Referência',ambicioso:'Ambicioso',personalizado:'Personalizado'};
-var current='prudente';
-function run(){
-  var p={};KEYS.forEach(function(k){p[k]=+$(k).value;});
-  var r=calc(p), roi=(r.contribution-r.opex)/r.opex*100, mx=Math.max(r.contribution,r.opex,1);
-  $('o-sTotal').textContent=(p.sTotal?'+'+num(p.sTotal)+'%':'como hoje')+' · '+num(r.total)+' contratos';
-  $('o-sDirect').textContent=num(BASE.directPct,1)+'% → '+num(p.sDirect,1)+'%';
-  $('o-sRepeat').textContent=num(BASE.repeatPct,1)+'% → '+num(p.sRepeat,1)+'%';
-  $('o-sExtras').textContent=num(BASE.extrasPer100,0)+' → '+num(p.sExtras,1);
-  $('r-explain').innerHTML='Passar de <b>'+num(BASE.directPct,1)+'%</b> para <b>'+num(p.sDirect,1)+'%</b> de reservas directas'+(p.sTotal?', com as vendas totais a crescer '+num(p.sTotal)+'%,':'')+' é um crescimento de <b>'+pct(r.directGrowth)+'</b> nas reservas directas: de '+num(BASE.direct)+' para '+num(r.direct)+' por ano. A percentagem mede a rubrica, não as vendas totais.';
-  $('r-direct').textContent=num(r.direct);
-  $('r-directq').textContent='Quota de '+num(BASE.directPct,1)+'% para '+num(p.sDirect,1)+'% das vendas';
-  $('r-directd').textContent=pct(r.directGrowth)+' nas directas';
-  $('r-global').textContent=num(r.contracts);
-  $('r-globald').textContent=(p.sTotal?'+'+num(p.sTotal)+'% de vendas totais, ':'')+'+'+num(r.concierge)+' pelo Concierge';
-  $('r-extras').textContent=num(r.extras);
-  $('r-extrasd').textContent='+'+num(r.extraAdded)+' pelo Concierge';
-  $('r-roi').textContent=pct(roi);
-  $('r-roi').style.color=roi<0?'#FFB4A8':'#00F2D7';
-  $('r-saldo').textContent='Saldo '+signed(r.balance)+' por ano';
-  $('r-saldo').className='pill'+(r.balance>=0?' on':'');
-  $('r-ret').textContent=eur(r.contribution);
-  $('r-cost').textContent=eur(r.opex);
-  $('r-retbar').style.width=(r.contribution/mx*100)+'%';
-  $('r-costbar').style.width=(r.opex/mx*100)+'%';
-  $('r-saldo24').textContent=r.balance>0?'Investimento inicial de 28.000 € recuperado em cerca de '+num(Math.ceil(CAPEX/(r.balance/12)))+' meses de fase 2.':'Com estes valores o retorno ainda não cobre o custo anual: é preciso mais penetração.';
-  $('sim-live').textContent='Cenário '+NAMES[current]+': reservas directas de '+num(BASE.directPct,1)+'% para '+num(p.sDirect,1)+'% das vendas, '+num(r.direct)+' por ano; '+num(r.contracts)+' contratos globais; '+num(r.extras)+' extras; retorno de '+eur(r.contribution)+' por ano para um custo de '+eur(r.opex)+', ROI de '+(roi<0?'menos ':'')+num(Math.abs(roi))+'%.';
-}
-function setPreset(name,keepTotal){
-  var tot=$('sTotal').value;current=name;KEYS.forEach(function(k){$(k).value=PRESETS[name][k];});
-  if(keepTotal)$('sTotal').value=tot;
-  document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.preset===name?'true':'false');});
-  run();
-}
-document.querySelectorAll('[data-preset]').forEach(function(b){b.addEventListener('click',function(){setPreset(b.dataset.preset,true);});});
-KEYS.forEach(function(k){$(k).addEventListener('input',function(){if(k!=='sTotal'){current='personalizado';
-  document.querySelectorAll('[data-preset]').forEach(function(b){b.setAttribute('aria-pressed','false');});}run();});});
-$('iaReset').addEventListener('click',function(){setPreset('prudente');});
-$('simToggle').addEventListener('click',function(){var b=$('simBox'),o=b.hidden;b.hidden=!o;this.setAttribute('aria-expanded',o?'true':'false');this.textContent=o?'Fechar o simulador':'Abrir o simulador';});
-setPreset('prudente');
 
 // Gráfico de contratos por mês
 (function(){
