@@ -187,7 +187,7 @@ body.pres #presBar{display:flex}
 #presBar button{width:30px;height:30px;border-radius:50%;border:1px solid #3A4B57;background:transparent;color:#fff;font:600 16px/1 Inter,Arial,sans-serif;cursor:pointer}
 #presBar button:hover{background:#00F2D7;color:#05141F;border-color:#00F2D7}
 @media (max-width:780px){body.pres{overflow:auto}body.pres main{height:auto;overflow:visible}}
-</style>
+@media(min-width:901px){#caminhos{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:stretch}}</style>
 </head>
 <body>
 <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
@@ -348,9 +348,9 @@ body.pres #presBar{display:flex}
   <h2 id="h-financeiro">Investir em tecnologia, não em estrutura.</h2>
   <p class="lead">Para atingir as metas, ou parte delas, sem a ferramenta teríamos de criar uma estrutura de apoio ao cliente. A ferramenta mantém o nível de serviço sem imputar esse custo em pessoas.</p>
 
-  <div class="grid g2">
+  <div class="grid g2" id="caminhos">
     <div class="tile"><p class="k">Caminho 1 · Mais estrutura</p><h3 style="margin-top:10px">Criar uma equipa de customer support</h3><ul class="plain"><li>25.500 € por ano, por cada pessoa a mais</li><li>Custo fixo o ano inteiro, num negócio sazonal</li><li>Cada pessoa cobre um turno, numa estação</li></ul><p class="d" style="margin-top:12px"><b>Custo fixo. Procura sazonal.</b></p></div>
-    <div class="tile dark"><p class="k">Caminho 2 · A nossa proposta</p><h3 style="margin-top:10px">Investir na ferramenta</h3><ul class="plain"><li>Responde igual em Agosto e em Janeiro</li><li>Três estações, vários idiomas, todas as horas</li><li>As pessoas ficam para o cliente, não para a rotina</li></ul><p class="d" style="margin-top:12px"><b>A tecnologia escala com a época. A estrutura não.</b></p></div>
+    <div class="tile dark" style="border:2px solid #00F2D7;box-shadow:0 10px 30px rgba(0,242,215,.22)"><p class="k" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">Caminho 2 <span class="pill on">A nossa proposta</span></p><h3 style="margin-top:12px;font-size:clamp(24px,2.4vw,34px);line-height:1.15;color:#00F2D7">Investir na ferramenta</h3><ul class="plain"><li>Responde igual em Agosto e em Janeiro</li><li>Três estações, vários idiomas, todas as horas</li><li>As pessoas ficam para o cliente, não para a rotina</li></ul><p class="d" style="margin-top:14px;font-size:18px;color:#00F2D7"><b>A tecnologia escala com a época. A estrutura não.</b></p></div>
   </div>
 
   <h3 style="margin-top:34px">O investimento em tecnologia</h3>
